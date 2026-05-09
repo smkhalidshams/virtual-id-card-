@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dr. S M Khalid Shams | Virtual Professional ID Card</title>
+    <!-- Google Fonts + Font Awesome 6 (free) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* MAIN CARD CONTAINER — VIRTUAL ID CARD STYLE */
+        .virtual-id-card {
+            max-width: 1100px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(0px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .virtual-id-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 55px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* inner content grid: left (profile + roles) / right (contacts + ids) */
+        .card-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 0;
+            background: #fff;
+        }
+
+        /* LEFT PANEL — professional identity */
+        .left-panel {
+            background: #ffffff;
+            padding: 2rem 1.8rem 2rem 2rem;
+            border-right: 1px solid #eef2f9;
+        }
+
+        /* RIGHT PANEL — contact & digital identifiers */
+        .right-panel {
+            background: #fbfdff;
+            padding: 2rem 2rem 2rem 1.8rem;
+        }
+
+        /* AVATAR + INITIALS */
+        .avatar-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .avatar-circle {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(145deg, #1e5f7a, #0b3b4f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 18px -8px rgba(0, 32, 64, 0.2);
+            border: 2px solid white;
+        }
+        .avatar-circle span {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+        }
+        .badge-icon {
+            background: #eef2ff;
+            padding: 6px 12px;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1e5f7a;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge-icon i {
+            font-size: 0.85rem;
+        }
+
+        /* Name + degree */
+        .full-name {
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #0a2c3b;
+            margin-top: 0.5rem;
+            line-height: 1.2;
+        }
+        .degree {
+            display: inline-block;
+            background: #e6f3f8;
+            color: #0a4b62;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.8rem 0 1.25rem 0;
+            letter-spacing: 0.3px;
+        }
+
+        /* POSITION BLOCKS (professional roles) */
+        .role-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            margin: 1.8rem 0 1rem 0;
+        }
+        .role-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #f9fcff;
+            padding: 0.9rem 1rem;
+            border-radius: 1.2rem;
+            transition: all 0.2s;
+            border: 1px solid #eef2fa;
+        }
+        .role-item:hover {
+            background: #ffffff;
+            border-color: #cbdff2;
+            transform: translateX(3px);
+        }
+        .role-icon {
+            font-size: 1.35rem;
+            color: #2c7f9c;
+            min-width: 32px;
+            text-align: center;
+            margin-top: 2px;
+        }
+        .role-text {
+            font-weight: 500;
+            color: #1f3e48;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+        .role-text strong {
+            font-weight: 700;
+            color: #0b576e;
+        }
+        .org-name {
+            color: #165f75;
+            font-weight: 600;
+        }
+
+        /* DIVIDER */
+        .divider-light {
+            height: 1px;
+            background: linear-gradient(90deg, #e2e8f0, #cbdbe0, #e2e8f0);
+            margin: 1.5rem 0 1.2rem 0;
+        }
+
+        /* RIGHT PANEL styles */
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #467a8f;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i {
+            font-size: 1rem;
+        }
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            background: #f8fafd;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
+            transition: background 0.2s;
+            border: 1px solid #ecf3f9;
+        }
+        .contact-item:hover {
+            background: #ffffff;
+            border-color: #cde0ef;
+        }
+        .contact-item i {
+            width: 28px;
+            font-size: 1.2rem;
+            color: #2c7f9c;
+            text-align: center;
+        }
+        .contact-item a {
+            text-decoration: none;
+            color: #1e4d60;
+            font-weight: 500;
+            word-break: break-all;
+            transition: color 0.2s;
+        }
+        .contact-item a:hover {
+            color: #0b5e7a;
+            text-decoration: underline;
+        }
+        .multi-email {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .email-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+        .email-line i {
+            width: 28px;
+        }
+        .badge-orcid {
+            background: #eef5ea;
+            border-left: 3px solid #2c7f9c;
+        }
+
+        /* IDs row */
+        .id-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f8fafd;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
+            transition: 0.2s;
+            border: 1px solid #ecf3f9;
+        }
+        .social-link i {
+            width: 28px;
+            font-size: 1.3rem;
+        }
+        .social-link a {
+            font-weight: 500;
+            text-decoration: none;
+            color: #1e4d60;
+        }
+        .social-link a:hover {
+            text-decoration: underline;
+            color: #117f9e;
+        }
+        .fa-orcid { color: #a6ce39; }
+        .fa-linkedin { color: #0a66c2; }
+        .fa-researchgate { color: #00ccbb; }
+
+        /* FOOTER / ID STAMP */
+        .id-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            font-size: 0.7rem;
+            text-align: right;
+            border-top: 1px dashed #dce5ef;
+            color: #8ba3b5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .verified-badge {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            background: #eef2f5;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #2c5c6e;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 780px) {
+            .card-inner {
+                grid-template-columns: 1fr;
+            }
+            .left-panel {
+                border-right: none;
+                border-bottom: 1px solid #eef2f9;
+                padding: 1.8rem;
+            }
+            .right-panel {
+                padding: 1.8rem;
+            }
+            .full-name {
+                font-size: 1.65rem;
+            }
+            .avatar-wrapper {
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            .role-item {
+                padding: 0.75rem;
+            }
+            .contact-item, .social-link {
+                padding: 0.6rem 0.8rem;
+            }
+            .full-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* extra polish */
+        .sub-note {
+            font-size: 0.7rem;
+            color: #6b8ca0;
+            margin-top: 6px;
+            display: inline-block;
+        }
+        .phone-call {
+            font-family: monospace;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="virtual-id-card">
+        <div class="card-inner">
+            <!-- LEFT SIDE: identity & roles -->
+            <div class="left-panel">
+                <div class="avatar-wrapper">
+                    <div class="avatar-circle">
+                        <span>SK</span>
+                    </div>
+                    <div class="badge-icon">
+                        <i class="fas fa-id-card"></i> VIRTUAL ID · ACTIVE
+                    </div>
+                </div>
+                <div class="full-name">S M Khalid Shams</div>
+                <div class="degree">
+                    <i class="fas fa-graduation-cap" style="margin-right: 6px;"></i> MBBS, MPH
+                </div>
+                
+                <!-- Professional positions (main associations) -->
+                <div class="role-list">
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-stethoscope"></i></div>
+                        <div class="role-text"><strong>Study Physician</strong> <br> <span class="org-name">Projahmno Research Foundation</span></div>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="role-text"><strong>Graduate Student</strong> <br> <span class="org-name">Independent University Bangladesh</span></div>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-flask"></i></div>
+                        <div class="role-text"><strong>Research Associate</strong> <br> <span class="org-name">EPI2R.org</span> — Epidemiology & Innovation</div>
+                    </div>
+                </div>
+
+                <!-- short bio / focus area -->
+                <div class="divider-light"></div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px;">
+                    <span style="background:#eef2fa; padding:4px 12px; border-radius:40px; font-size:0.75rem; font-weight:500;"><i class="fas fa-chart-line"></i> Public Health Research</span>
+                    <span style="background:#eef2fa; padding:4px 12px; border-radius:40px; font-size:0.75rem; font-weight:500;"><i class="fas fa-database"></i> Clinical Epidemiology</span>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: detailed contact, ORCID, LINKS -->
+            <div class="right-panel">
+                <div class="section-title">
+                    <i class="fas fa-address-card"></i> Direct Contact
+                </div>
+                <div class="contact-grid">
+                    <!-- primary email -->
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:smkshams@prfbd.org">smkshams@prfbd.org</a>
+                    </div>
+                    <!-- secondary email -->
+                    <div class="contact-item">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <a href="mailto:dr.smkhalidshams@gmail.com">dr.smkhalidshams@gmail.com</a>
+                    </div>
+                    <!-- phone with direct call -->
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:+8801772176369" class="phone-call">+880 1772-176369</a>
+                        <span class="sub-note"><i class="fab fa-whatsapp" style="margin-left: 8px;"></i> Also available for research collab</span>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <i class="fas fa-fingerprint"></i> Academic & Researcher IDs
+                </div>
+                <div class="id-links">
+                    <!-- ORCID -->
+                    <div class="social-link">
+                        <i class="fab fa-orcid"></i>
+                        <a href="https://orcid.org/0009-0008-2998-3465" target="_blank" rel="noopener noreferrer">orcid.org/0009-0008-2998-3465</a>
+                    </div>
+                    <!-- LinkedIn -->
+                    <div class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linkedin.com/in/smkhalidshams" target="_blank" rel="noopener noreferrer">linkedin.com/in/smkhalidshams</a>
+                    </div>
+                    <!-- ResearchGate -->
+                    <div class="social-link">
+                        <i class="fab fa-researchgate"></i>
+                        <a href="https://researchgate.net/profile/S-M-Khalid-Shams" target="_blank" rel="noopener noreferrer">researchgate.net/profile/S-M-Khalid-Shams</a>
+                    </div>
+                </div>
+                
+                <!-- additional affiliations context -->
+                <div class="divider-light"></div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;">
+                    <span style="font-size: 0.7rem; background: #eef2fa; padding: 0.2rem 0.8rem; border-radius: 20px;"><i class="fas fa-building"></i> Projahmno Research Foundation</span>
+                    <span style="font-size: 0.7rem; background: #eef2fa; padding: 0.2rem 0.8rem; border-radius: 20px;"><i class="fas fa-university"></i> IUB</span>
+                    <span style="font-size: 0.7rem; background: #eef2fa; padding: 0.2rem 0.8rem; border-radius: 20px;"><i class="fas fa-globe"></i> EPI2R.org</span>
+                </div>
+
+                <!-- footer stamp / verification -->
+                <div class="id-footer">
+                    <div class="verified-badge">
+                        <i class="fas fa-check-circle" style="color: #2c7f9c;"></i> VERIFIED CREDENTIALS
+                    </div>
+                    <div>
+                        <i class="far fa-qrcode"></i> digital ID · v1.0
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- subtle accent line (just for style) -->
+        <div style="height: 5px; background: linear-gradient(90deg, #1e7e9c, #6ab0c6, #cbe5ef); width: 100%;"></div>
+    </div>
+</body>
+</html>
